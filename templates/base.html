@@ -162,6 +162,7 @@
             </div>
             <div class="top-right">
                 <div class="header-menu">
+                    
                     <div class="header-left">
                         <button class="search-trigger"><i class="fa fa-search"></i></button>
                         <div class="form-inline">
@@ -256,6 +257,18 @@
             </div>
         </header>
         <!-- /#header -->
+        <main role="main" class="container">
+         <div class="row">
+            <div class="col-xs-6 col-sm-4">
+                {% if messages %}
+                                {% for message in messages %}
+                                    <div class="alert alert-{{ message.tags }}">
+                                        {{ message }}
+                                    </div>
+                                {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
         {% block content %}
         {% endblock content %}
         <div class="clearfix"></div>
