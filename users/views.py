@@ -1,10 +1,14 @@
 from django.shortcuts import render, redirect
 from .form import UsersForm
+from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.csrf import csrf_protect
+
 # from django.contrib.auth.forms import UserCreationForm
 # Create your views here.
+
+
 
 @csrf_protect
 def register(request):
@@ -21,19 +25,33 @@ def register(request):
         form = UsersForm()
     return render(request, 'users/register.html', {'form': form})
 
-
+@csrf_protect
 def masuk(request):
     if request.method == "POST":
+        form = UsersForm(request.POST)    
+
+        username = request.POST['username']
+        password = request.POST['password']
+
+        user = authenticate(request, username=username, password=password)
         
-        uname = request.POST['username']
-        pwd = request.POST['password']
-        # print(uname)
-        # print(pwd)
-        user = authenticate(request, username=uname, password=pwd)
-        print(user)
-        # if user is not None:
-        #     login(request, user)
-        #     return redirect('home')
-        # else:
-        #     return redirect('register')
-    return render(request, 'users/login.html')
+        if user is not None:
+            
+            login(request, user)
+            
+            messages.success(request, f'Selamat Datang {username}')               
+            return redirect('home')   
+    else:
+        form = UsersForm()   
+    return render(request, 'users/login.html', {'form': form})
+
+
+def keluar(request):
+    if request.method == "POST":
+        
+        username = request.POST['username']
+        
+        logout(request)
+        messages.success(request, f'Akun {username} berhasil keluar')
+    return redirect('login')
+

@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'daftar.apps.DaftarConfig',
     'users.apps.UsersConfig',
+    'django.contrib.humanize',
 ]
 
 MIDDLEWARE = [

@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+    <!-- Orders -->
+<div class="orders">
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="box-title">Laporan Pendaftaran TK Winback </h4>
+                </div>
+                <div class="card-body--">
+                    <div class="table-stats order-table ov-h">
+                        <table class="table ">
+                            <thead>
+                                <tr>
+                                    <th class="serial">No</th>
+                                    <th>NIK</th>
+                                    <th>Nama</th>
+                                    <th>Tempat/<br/>Tgl. Lahir</th>
+                                    <th>Alamat</th>
+                                    <th>Pekerjaan</th>
+                                    <th>Lokasi</th>
+                                    <th>Penghasilan</th>
+                                    <th>Program</th>
+                                    <th>Priode<br/>Program</th>
+                                    <th>Total</th>
+                                    <th>User</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for data in datas %}
+                                <tr>
+                                
+                                    <td class="serial">{{ forloop.counter }}</td>
+                                    <td> {{data.nik}} </td>
+                                    <td>  <span class="name">{{data.nama}}</span> </td>
+                                    <td> {{data.tempat_lhr}}/<br/>{{data.tgl_lhr}} </td>
+                                    <td> {{data.alamat}} </td>
+                                    <td> {{data.pekerjaan}} </td>
+                                    <td> {{data.lokasi}} </td>
+                                    <td> <span class="price">Rp.{{data.penghasilan|intcomma}}</span> </td>
+                                    <td> {{data.get_program_display}}</td>
+                                    <td> {{data.get_bulan_display}}</td>
+                                    <td> <span class="price">{{get.total|intcomma}}</span> </td>
+                                    <td>
+                                        <span class="badge badge-complete">Complete</span>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div> <!-- /.table-stats -->
+                </div>
+            </div> <!-- /.card -->
+        </div>  <!-- /.col-lg-8 -->
+
+        
+    </div>
+</div>
+<!-- /.orders -->
+{% endblock content %}
