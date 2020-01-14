@@ -40,7 +40,7 @@ class Daftar(models.Model):
     no_hp = models.CharField(max_length=15)
     pekerjaan = models.CharField(max_length=30)
     lokasi = models.CharField(max_length=30)
-    penghasilan = models.DecimalField(max_digits=10, decimal_places=0)
+    penghasilan = models.FloatField()
     program = models.IntegerField(choices=PROGRAM)
     bulan = models.IntegerField(choices=BULAN)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
