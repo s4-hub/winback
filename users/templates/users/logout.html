@@ -1,0 +1,23 @@
+{% extends 'users/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="login-form">
+    <h1>Log out</h1>
+    <p>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="sufee-alert alert with-close alert-success alert-dismissible fade show">
+                    <span class="badge badge-pill badge-success">Success</span>
+                    {{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% endfor %}
+        {% endif %}
+        <div class="register-link m-t-15 text-center">
+            <p>Already have account ? <a href="{% url 'login' %}"> Sign in</a></p>
+        </div>
+    </div>
+{% endblock content %}

@@ -3,6 +3,7 @@ from .form import UsersForm
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.views import logout_then_login
 from django.views.decorators.csrf import csrf_protect
 
 # from django.contrib.auth.forms import UserCreationForm
@@ -26,7 +27,7 @@ def register(request):
     return render(request, 'users/register.html', {'form': form})
 
 @csrf_protect
-def masuk(request):
+def masuk(request, next=None):
     if request.method == "POST":
         form = UsersForm(request.POST)    
 
@@ -40,18 +41,22 @@ def masuk(request):
             login(request, user)
             
             messages.success(request, f'Selamat Datang {username}')               
-            return redirect('home')   
+            return redirect('home')
+        else:
+            messages.error(request, f'Akun atau password anda Salah')
+            return redirect('login')   
     else:
-        form = UsersForm()   
+        form = UsersForm()
+           
     return render(request, 'users/login.html', {'form': form})
 
 
-def keluar(request):
-    if request.method == "POST":
+def singout(request):
+    # if request.method == "POST":
         
-        username = request.POST['username']
-        
-        logout(request)
-        messages.success(request, f'Akun {username} berhasil keluar')
+    #     username = request.POST['username']     
+            
+    logout(request)
+    messages.add_message(request, messages.INFO,'Akun berhasil keluar')
     return redirect('login')
 
