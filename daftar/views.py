@@ -2,16 +2,25 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from .models import Daftar, DataTK
 from .form import DaftarForm, DataTkForm
+import crawler1
 
 # import json, requests, urllib
 
 def index(request):
 
     datas = Daftar.objects.all()
+    # datas = DataTK.objects.all()
     # print(datas)
     return render(request, 'daftar/winback_list.html', {'datas': datas})
+
+def cari(request):
+    crawler1.crawler()
+    cari = DataTK.objects.all()
+    return render(request, 'daftar/cari.html', {'cari': cari}) 
     
 def daftar_tk(request):
+    # crawler1.crawler()
+    # cari = DataTK.objects.all()
     if request.method == "POST":
         # cform = DaftarForm(request.POST)
 

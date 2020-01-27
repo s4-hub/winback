@@ -1,9 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
-import decimal
+import decimal, requests, sqlite3
+from bs4 import BeautifulSoup
+import json
 # import crawler1
 # Create your models here.
+
 
 PEKERJAAN = [
 ('P001','PETANI/PEKEBUN'),
@@ -137,7 +140,8 @@ class DataTK(models.Model):
     # def getjson(self):
     #     r = crawler1(y)
 
-class Daftar(models.Model):   
+class Daftar(models.Model):
+    nik = models.ForeignKey(DataTK, on_delete=models.CASCADE)   
     mail = models.EmailField()    
     no_hp = models.CharField(max_length=15)
     pekerjaan1 = models.CharField(choices=PEKERJAAN, max_length=50)
