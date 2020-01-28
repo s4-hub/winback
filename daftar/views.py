@@ -1,8 +1,11 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
+from django.db.models import Q
 from django.contrib.auth.models import User
+from django.contrib import messages
 from .models import Daftar, DataTK
 from .form import DaftarForm, DataTkForm
-import crawler1
+import sqlite3, collections, json
+from .crawler1 import crawler
 
 # import json, requests, urllib
 
@@ -13,10 +16,46 @@ def index(request):
     # print(datas)
     return render(request, 'daftar/winback_list.html', {'datas': datas})
 
+# def toJson():
+#     conn = sqlite3.connect("./db.sqlite3")
+#     curr = conn.cursor()
+
+#     curr.execute('''
+#                     SELECT * FROM  daftar_datatk
+#                     ''')
+#     rows = curr.fetchall()
+#     lists = []
+#     for row in rows:
+#         d = collections.OrderedDict()
+#         d['id'] = row.id
+#         d['nik'] = row.nik
+#         d['nama'] = row.nama
+#         d['tgl_lhr'] = row.tgl_lhr
+#         d['tempat_lhr'] = row.tempat_lhr
+#         d['alamat'] = row.alamat
+#         lists.append(d)
+    
+#     j = json.dumps(lists)
+#     jsfile = 'tenaga_kerja.js'
+#     f = open(jsfile, 'w')
+
+#     return f,j
+
 def cari(request):
-    crawler1.crawler()
-    cari = DataTK.objects.all()
-    return render(request, 'daftar/cari.html', {'cari': cari}) 
+    
+    if request.method == 'POST':
+        nik = request.POST['ktp']
+        crawler(nik)
+        if nik:
+            match = DataTK.objects.filter(Q(nik__icontains=nik))
+            if match:
+                return render(request, 'daftar/cari.html', {'nik': nik})
+            else:
+                messages.error(request, 'NIK tidak ditemukan')
+        else:
+            return HttpResponse('home')
+    
+    return render(request, 'daftar/cari.html') 
     
 def daftar_tk(request):
     # crawler1.crawler()

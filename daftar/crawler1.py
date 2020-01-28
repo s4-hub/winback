@@ -3,14 +3,14 @@ from bs4 import BeautifulSoup
 import json, os
 
 
-def crawler():
+def crawler(nik):
 
 # BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
     conn = sqlite3.connect('C:/venv/winback/db.sqlite3')
     curr = conn.cursor()
 
-    src = 'http://smile.bpjsketenagakerjaan.go.id/smile/mod_kn/ajax/kn5000_detail.php?NIK=1103041606770001'
+    src = 'http://smile.bpjsketenagakerjaan.go.id/smile/mod_kn/ajax/kn5000_detail.php?NIK='+nik
     url = requests.get(src).text
     # page = req.request('GET', url, preload_content=False)
     soup = BeautifulSoup(url, 'html.parser')

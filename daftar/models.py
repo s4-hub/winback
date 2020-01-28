@@ -134,7 +134,7 @@ class DataTK(models.Model):
     nik = models.CharField(max_length=16)
     nama = models.CharField(max_length=50)
     tempat_lhr = models.CharField(max_length=30)
-    tgl_lhr = models.DateField()
+    tgl_lhr = models.CharField(max_length=10)
     alamat = models.TextField()
     
     # def getjson(self):

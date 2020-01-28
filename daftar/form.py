@@ -27,11 +27,14 @@ class DaftarForm(forms.ModelForm):
                 attrs={'class': 'form-control',
                 'placeholder': 'Nama',
                 }),
-            'tgl_lhr': forms.TextInput(
+            # 'tgl_lhr': forms.TextInput(
+            #     attrs={'class': 'form-control',
+            #     'placeholder': 'Tanggal Lahir',
+            #     'data-date-format': 'dd/mm/yyyy',
+            #     'id': 'datepicker'}),
+            'tgl_lhr' : forms.TextInput(
                 attrs={'class': 'form-control',
-                'placeholder': 'Tanggal Lahir',
-                'data-date-format': 'dd/mm/yyyy',
-                'id': 'datepicker'}),
+                }),
             'tempat_lhr': forms.TextInput(
                 attrs={'class': 'form-control',
                 'placeholder': 'Tempat Lahir'}),
