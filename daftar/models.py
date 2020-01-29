@@ -131,7 +131,7 @@ LOKASI = [
 #     nama = models.CharField(max_length=50)
 
 class DataTK(models.Model):
-    nik = models.CharField(max_length=16)
+    nik = models.CharField(max_length=16, blank=False)
     nama = models.CharField(max_length=50)
     tempat_lhr = models.CharField(max_length=30)
     tgl_lhr = models.CharField(max_length=10)

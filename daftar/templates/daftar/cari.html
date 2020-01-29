@@ -51,7 +51,7 @@
                                 <strong>CARI NIK</strong>
                             </div>
                             <div class="card-body card-block">
-                             <form action="{% url 'daftar:cari' %}" method="post" enctype="multipart/form-data" class="form-horizontal">
+                             <form method="post" enctype="multipart/form-data" class="form-horizontal">
                                 {% csrf_token %}
                                 <div class="form-group">
                                   <div class="row m-2">
@@ -62,10 +62,12 @@
                                         <input class="form-control" name="ktp">
                                     </div>
                                     <div class="col" align="right">
-                                        <!--
+                                        
                                         <a href="{% url 'daftar:add_tk' %}" class="btn btn-primary" role="button">Tambah</a>
-                                        -->
+                                        
+                                        <!--
                                         <button type="submit" class="btn btn-success">Cari</button>
+                                        -->
                                     </div>
                                    </div>
                                   </div>
@@ -81,14 +83,35 @@
           </div>
 
       </div>
-
-    <div class="col-xs-6 col-sm-8">
-        <div class="card">
-            <div class="card-header">
-                <strong>CARI NIK</strong>
-            </div>
-
-    </div>
+        {% comment %} <div class="table-stats order-table ov-h">
+            <table class="table ">
+                <thead>
+                    <tr>
+                        <th class="serial">No</th>
+                        <th>NIK</th>
+                        <th>Nama</th>
+                        <th>Tempat Lahir</th>
+                        <th>Tanggal Lahir</th>
+                        <th>Alamat</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in nik %}
+                    <tr>
+                        <td class="serial">{{ forloop.counter }}</td>
+                        <td> {{row.nik}} </td>
+                        <td>  <span class="name">Louis Stanley</span> </td>
+                        <td> <span class="product">iMax</span> </td>
+                        <td><span class="count">231</span></td>
+                        <td>
+                            <span class="badge badge-complete">Complete</span>
+                        </td>
+                    </tr>
+                     {% endfor %}                                                                               
+                </tbody>
+            </table>
+        </div>     {% endcomment %}
   </div>
 
 

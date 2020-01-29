@@ -14,7 +14,7 @@ class DaftarForm(forms.ModelForm):
         model = Daftar
         # exclude = ('DataTk')
         fields = [
-                'mail', 'no_hp', 'pekerjaan1',
+                'nik','mail', 'no_hp', 'pekerjaan1',
                 'pekerjaan2', 'lokasi', 'penghasilan',
                 'program', 'bulan', 'user_id'
             ]
