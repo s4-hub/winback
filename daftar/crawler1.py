@@ -1,13 +1,15 @@
 import requests, sqlite3
 from bs4 import BeautifulSoup
 import json, os
+from .models import DataTK
+from django.contrib import messages
 
 
 def crawler(nik):
 
 # BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-    conn = sqlite3.connect('C:/venv/winback/db.sqlite3')
+    conn = sqlite3.connect('./db.sqlite3')
     curr = conn.cursor()
 
     src = 'http://smile.bpjsketenagakerjaan.go.id/smile/mod_kn/ajax/kn5000_detail.php?NIK='+nik
@@ -40,8 +42,13 @@ def crawler(nik):
     datas['tempat_lahir'] = data[15]
     datas['alamat'] = data[27]
 
-    curr.execute('''INSERT INTO daftar_datatk (nik, nama, tempat_lhr, tgl_lhr, alamat) VALUES (?, ?, ?, ?, ?)''',
-                    (datas['nik'], datas['nama'], datas['tempat_lahir'], datas['tgl_lahir'], datas['alamat']))
+    cek = DataTK.objects.filter(nik=data[3])
+    if cek:
+        cek.distinct(nik)
+    else:
+        curr.execute('''INSERT INTO daftar_datatk (nik, nama, tempat_lhr, tgl_lhr, alamat) VALUES (?, ?, ?, ?, ?)''',
+                        (datas['nik'], datas['nama'], datas['tempat_lahir'], datas['tgl_lahir'], datas['alamat']))
+    
     # x = json.dump(datas, open('datas.json', 'w'))
     # y = eval(x)
     # print(y)

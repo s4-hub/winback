@@ -45,15 +45,18 @@ def cari(request):
     
     if request.method == 'POST':
         nik = request.POST['ktp']
-        crawler(nik)
-        if nik:
-            match = DataTK.objects.filter(Q(nik__icontains=nik))
-            if match:
-                return render(request, 'daftar/cari.html', {'nik': nik})
+        if nik is None:
+            crawler(nik)
+            if nik:
+                match = DataTK.objects.filter(Q(nik__icontains=nik))
+                if match:
+                    return render(request, 'daftar/cari.html', {'nik': nik})
+                else:
+                    messages.error(request, 'NIK tidak ditemukan')
             else:
-                messages.error(request, 'NIK tidak ditemukan')
+                return HttpResponse('home')
         else:
-            return HttpResponse('home')
+            messages.error(request, 'NIK tidak boleh kosong')
     
     return render(request, 'daftar/cari.html') 
     

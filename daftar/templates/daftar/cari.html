@@ -29,6 +29,18 @@
         </div>
 
         <div class="content">
+            {% if messages %}
+                
+                {% for message in messages %}
+                        <div class="sufee-alert alert with-close alert-danger alert-dismissible fade show">
+                            <span class="badge badge-pill badge-danger">PERINGATAN!</span>
+                                {{ message }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                {% endfor %}
+            {% endif %}
             <div class="animated fadeIn">
 
                 <div class="row">
@@ -70,8 +82,13 @@
 
       </div>
 
+    <div class="col-xs-6 col-sm-8">
+        <div class="card">
+            <div class="card-header">
+                <strong>CARI NIK</strong>
+            </div>
 
-
+    </div>
   </div>
 
 

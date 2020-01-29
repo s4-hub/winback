@@ -1,27 +1,62 @@
-# import json, sqlite3, collections
+import requests, sqlite3
+from bs4 import BeautifulSoup
+import json, os
+from django.contrib import messages
 
 
-# def toJson(self):
-#     conn = sqlite3.connect("./db.sqlite3")
-#     curr = conn.cursor()
+class AmbilData():
+    def scr(x):
 
-#     curr.execute('''
-#                     SELECT * FROM  daftar_datatk
-#                     ''')
-#     rows = curr.fetchall()
-#     lists = []
-#     for row in rows:
-#         d = collections.OrderedDict()
-#         d['id'] = row.id
-#         d['nik'] = row.nik
-#         d['nama'] = row.nama
-#         d['tgl_lhr'] = row.tgl_lhr
-#         d['tempat_lhr'] = row.tempat_lhr
-#         d['alamat'] = row.alamat
-#         lists.append(d)
-    
-#     j = json.dumps(lists)
-#     with open('tk.js', 'w')
-    
+    # BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-#     return j
+        src = 'http://smile.bpjsketenagakerjaan.go.id/smile/mod_kn/ajax/kn5000_detail.php?NIK=1271182406860001'
+        url = requests.get(src).text
+        # page = req.request('GET', url, preload_content=False)
+        soup = BeautifulSoup(url, 'html.parser')
+
+        rows = soup.find_all('td')
+        # rows = table.find('td')
+        # t_data = table.find_all('tr')
+        # rows = table.find_all('td', recursive=False)
+        datas = {}
+        # print(rows)
+        data = [row.string for row in rows]
+            # data = row.find_all('td')
+            # data = row.find_all('td', attrs={'style': 'padding-top:10px;'})
+            # nik = data[2:].text
+        datas = {
+            "nik" : data[3],
+            "nama" : data[9],
+            "tempat_lahir" : data[15],
+            "tgl_lhr" : data[18],
+            "alamat" : data[27],
+            "kota" :  data[30],
+            "provinsi" : data[33]
+        }
+        datas['nik'] = data[3]
+        datas['nama'] = data[9]
+        datas['tgl_lahir'] = data[18]
+        datas['tempat_lahir'] = data[15]
+        datas['alamat'] = data[27]
+
+        return(datas)
+
+        # x = json.dump(datas, open('datas.json', 'w'))
+        # y = eval(x)
+        # print(y)
+        # y = json.dumps(js_file)
+        # with open('datas.json', 'w') as outfile:
+        #     eval(x)
+    def simpan(self):
+        # conn = sqlite3.connect('./db.sqlite3')
+        # curr = conn.cursor()
+
+        
+
+        # curr.execute('''INSERT INTO daftar_datatk (nik, nama, tempat_lhr, tgl_lhr, alamat) VALUES (?, ?, ?, ?, ?)''',
+        #                 (datas['nik'], datas['nama'], datas['tempat_lahir'], datas['tgl_lahir'], datas['alamat']))
+
+        # conn.commit()
+        # conn.close()
+
+        print(self.scr(datas))
