@@ -2,8 +2,12 @@ from rest_framework import serializers
 
 from daftar.models import DataTK, Daftar
 
-class DataTkSerializers(serializers.HyperlinkedModelSerializer):
+class DataTkSerializers(serializers.ModelSerializer):
     class Meta:
         model = DataTK
-        fields = ('nik', 'nama', 'tempat_lhr',
-                    'tgl_lhr', 'alamat')
+        fields = ('__all__')
+
+class DaftarSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Daftar
+        fields = ('__all__')

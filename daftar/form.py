@@ -1,5 +1,6 @@
 from django import forms
 from .models import Daftar, DataTK
+from django.db.models import Q
 
 class DataTkForm(forms.ModelForm):
     class Meta:
@@ -9,49 +10,53 @@ class DataTkForm(forms.ModelForm):
             'tgl_lhr', 'alamat'
         ]
 
+# class PkForm(forms.ModelForm):
+#     class Meta:
+#         model = Pekerjaan
+#         fields = ['pekerjaan1', 'pekerjaan2'
+#         'lokasi']
+
+#         widgets = {
+#                 'pekerjaan1': forms.TextInput(
+#                     attrs={'class': 'form-control',
+#                 'placeholder': 'Pekerjaan I'}),
+#                 'pekerjaan2': forms.TextInput(
+#                     attrs={'class': 'form-control'}),
+#                 'lokasi': forms.TextInput(
+#                     attrs={'class': 'form-control',
+#                 }),    
+
+#         }
+
 class DaftarForm(forms.ModelForm):
     class Meta:
         model = Daftar
         # exclude = ('DataTk')
         fields = [
-                'nik','mail', 'no_hp', 'pekerjaan1',
-                'pekerjaan2', 'lokasi', 'penghasilan',
+                'nik','mail', 'pekerjaan1',
+                'pekerjaan2', 'lokasi',
+                'no_hp', 'penghasilan',
                 'program', 'bulan', 'user_id'
             ]
         
         widgets = {
             'nik': forms.TextInput(
                 attrs={'class': 'form-control',
-                'placeholder': 'Nik'}),
-            'nama': forms.TextInput(
+                'value': '1271111'}),
+            'mail': forms.TextInput(
                 attrs={'class': 'form-control',
-                'placeholder': 'Nama',
-                }),
-            # 'tgl_lhr': forms.TextInput(
-            #     attrs={'class': 'form-control',
-            #     'placeholder': 'Tanggal Lahir',
-            #     'data-date-format': 'dd/mm/yyyy',
-            #     'id': 'datepicker'}),
-            'tgl_lhr' : forms.TextInput(
+                'type': 'email',
+                'placeholder': 'Email'}),
+            'pekerjaan1': forms.Select(
                 attrs={'class': 'form-control',
-                }),
-            'tempat_lhr': forms.TextInput(
+            'placeholder': 'Pekerjaan I'}),
+            'pekerjaan2': forms.Select(
+                attrs={'class': 'form-control'}),
+            'lokasi': forms.Select(
                 attrs={'class': 'form-control',
-                'placeholder': 'Tempat Lahir'}),
-            'alamat': forms.TextInput(
+            }),
+            'no_hp': forms.TextInput(
                 attrs={'class': 'form-control',
-                'placeholder': 'Alamat'
-                }),
-            'lokasi': forms.TextInput(
-                attrs={'class': 'form-control',
-                'placeholder': 'Lokasi'}),
-            'penghasilan': forms.TextInput(
-                attrs={'class': 'form-control',
-                'placeholder': 'Penghasilan'}),
-            'program': forms.TextInput(
-                attrs={'class': 'form-control',
-                'placeholder': 'Pilihan Program'}),
-            'bulan': forms.TextInput(
-                attrs={'class': 'form-control',
-                'placeholder': 'Bulan program'}),    
-        }
+                'placholder': 'NO Hp'}),
+            
+        }    

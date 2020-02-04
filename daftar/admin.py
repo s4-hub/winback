@@ -16,6 +16,6 @@ class DataTKAdmin(admin.ModelAdmin):
 @admin.register(Daftar)
 class DaftarAdmin(admin.ModelAdmin):
     list_display = [
-        'mail', 'no_hp', 'pekerjaan1', 'pekerjaan2', 'lokasi', 'penghasilan',
+        'mail', 'no_hp', 'penghasilan',
         'program', 'bulan', 'user_id', 'total'
     ]

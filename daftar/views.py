@@ -54,7 +54,7 @@ def cari(request):
             if nik:
                 match = DataTK.objects.filter(Q(nik__icontains=nik))
                 if match:
-                    return render(request, 'daftar/cari.html', {'nik': nik})
+                    return render(request, 'daftar/cari.html', {'match': match})
                     # return redirect('add/')
                 else:
                     messages.error(request, 'NIK tidak ditemukan')
@@ -64,9 +64,10 @@ def cari(request):
     return render(request, 'daftar/cari.html') 
     
 def daftar_tk(request):
+    match = DataTK.objects.all()
     if request.method == "POST":
         form = DaftarForm(request.POST)
-
+        
         if form.is_valid():
             post = form.save(commit=False)
             post.save()
@@ -76,15 +77,15 @@ def daftar_tk(request):
             return redirect('daftar:winback')
     else:
         form = DaftarForm()
-    return render(request, 'daftar/winback_new.html', {'form': form})
+    return render(request, 'daftar/winback_new.html', {'form': form, 'match':match})
 
-def getJson(request):
-    response = requests.get('http://localhost:8000/api/data_tk/')
-    data = response.json()
-    return render(request, 'daftar/winback_new.html', {
-        'nik':data['nik'],
-        'nama':data['nama'],
-        'tempat':data['tempat_lhr'],
-        'tgl_lhr':data['tgl_lhr'],
-        'alamat':data['alamat']
-    })
+# def getJson(request):
+#     response = requests.get('http://localhost:8000/api/data_tk/')
+#     data = response.json()
+#     return render(request, 'daftar/winback_new.html', {
+#         'nik':data['nik'],
+#         'nama':data['nama'],
+#         'tempat':data['tempat_lhr'],
+#         'tgl_lhr':data['tgl_lhr'],
+#         'alamat':data['alamat']
+#     })

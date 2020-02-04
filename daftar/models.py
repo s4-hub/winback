@@ -139,6 +139,7 @@ class DataTK(models.Model):
     
     # def getjson(self):
     #     r = crawler1(y)
+   
 
 class Daftar(models.Model):
     nik = models.ForeignKey(DataTK, on_delete=models.CASCADE)   

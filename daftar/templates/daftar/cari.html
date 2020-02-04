@@ -45,7 +45,7 @@
 
                 <div class="row">
 
-                    <div class="col-xs-6 col-sm-8">
+                    <div class="col-xs-8 col-sm-8">
                         <div class="card">
                             <div class="card-header">
                                 <strong>CARI NIK</strong>
@@ -59,15 +59,14 @@
                                     <label class=" form-control-label">INPUT NIK</label>
                                     <div class="input-group">
                                         <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                                        <input class="form-control" name="ktp">
+                                        <input class="form-control" name="ktp" style="margin-left: 5px">
                                     </div>
-                                    <div class="col" align="right">
-                                        
-                                        <a href="{% url 'daftar:add_tk' %}" class="btn btn-primary" role="button">Tambah</a>
-                                        
-                                        <!--
-                                        <button type="submit" class="btn btn-success">Cari</button>
-                                        -->
+                                    <div class="row">
+                                    <div class="col" align="right" style="padding-top : 15px">
+                                       
+                                        <button type="submit" class="btn btn-success" id="cari">Cari</button>
+                                       
+                                    </div>
                                     </div>
                                    </div>
                                   </div>
@@ -83,10 +82,11 @@
           </div>
 
       </div>
-        {% comment %} <div class="table-stats order-table ov-h">
+        <div class="col-xs-6 col-sm-8">
+         <div class="table-stats order-table ov-h">
             <table class="table ">
                 <thead>
-                    <tr>
+                    <tr align="center">
                         <th class="serial">No</th>
                         <th>NIK</th>
                         <th>Nama</th>
@@ -97,23 +97,24 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for row in nik %}
-                    <tr>
+                    {% for matches in match %}
+                    <tr align="center">
                         <td class="serial">{{ forloop.counter }}</td>
-                        <td> {{row.nik}} </td>
-                        <td>  <span class="name">Louis Stanley</span> </td>
-                        <td> <span class="product">iMax</span> </td>
-                        <td><span class="count">231</span></td>
+                        <td> {{matches.nik}} </td>
+                        <td>  <span class="name">{{ matches.nama }}</span> </td>
+                        <td> <span class="product">{{ matches.tempat_lhr }}</span> </td>
+                        <td>{{ matches.tgl_lhr }}</td>
+                        <td>{{ matches.alamat }}
                         <td>
-                            <span class="badge badge-complete">Complete</span>
+                            <a href="{% url 'daftar:add_tk' %}" class="btn btn-primary" role="button">Daftarkan</a>
                         </td>
                     </tr>
                      {% endfor %}                                                                               
                 </tbody>
             </table>
-        </div>     {% endcomment %}
+        </div>     
   </div>
-
+</div>
 
 </div><!-- .animated -->
 </div><!-- .content -->
