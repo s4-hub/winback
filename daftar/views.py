@@ -13,9 +13,10 @@ import requests
 def index(request):
 
     datas = Daftar.objects.all()
+    datastk = DataTK.objects.all()
     # datas = DataTK.objects.all()
     # print(datas)
-    return render(request, 'daftar/winback_list.html', {'datas': datas})
+    return render(request, 'daftar/winback_list.html', {'datas': datas, 'datastk': datastk})
 
 # def toJson():
 #     conn = sqlite3.connect("./db.sqlite3")
@@ -43,9 +44,10 @@ def index(request):
 #     return f,j
 
 def cari(request):
-    
+   
     if request.method == 'POST':
         nik = request.POST['ktp']
+        
         if not nik:
             messages.error(request, 'NIK tidak boleh kosong')
             return render(request, 'daftar/cari.html')
@@ -54,6 +56,7 @@ def cari(request):
             if nik:
                 match = DataTK.objects.filter(Q(nik__icontains=nik))
                 if match:
+                    
                     return render(request, 'daftar/cari.html', {'match': match})
                     # return redirect('add/')
                 else:
@@ -64,6 +67,7 @@ def cari(request):
     return render(request, 'daftar/cari.html') 
     
 def daftar_tk(request):
+
     match = DataTK.objects.all()
     if request.method == "POST":
         form = DaftarForm(request.POST)
@@ -71,10 +75,11 @@ def daftar_tk(request):
         if form.is_valid():
             post = form.save(commit=False)
             post.save()
+            # nik = form.cleaned_data.get('nik')
             # karyawan_created.delay(post.id)
             # karyawan_jatuh_tempo.apply_async((post.id,),
             #                                  countdown=60)
-            return redirect('daftar:winback')
+            return redirect('daftar')
     else:
         form = DaftarForm()
     return render(request, 'daftar/winback_new.html', {'form': form, 'match':match})
