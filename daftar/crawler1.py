@@ -48,6 +48,10 @@ def crawler(nik):
     else:
         curr.execute('''INSERT INTO daftar_datatk (nik, nama, tempat_lhr, tgl_lhr, alamat) VALUES (?, ?, ?, ?, ?)''',
                         (datas['nik'], datas['nama'], datas['tempat_lahir'], datas['tgl_lahir'], datas['alamat']))
+        # curr.execute(
+        #     '''INSERT INTO daftar_daftar (nik) VALUES (?)''',
+        #     (datas['nik'])
+        # )
     
     # x = json.dump(datas, open('datas.json', 'w'))
     # y = eval(x)

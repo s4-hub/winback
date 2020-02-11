@@ -33,6 +33,7 @@ class DaftarForm(forms.ModelForm):
         model = Daftar
         
         # exclude = ('DataTk')
+        
         fields = [
                 'mail', 'pekerjaan1',
                 'pekerjaan2', 'lokasi',
@@ -41,9 +42,9 @@ class DaftarForm(forms.ModelForm):
             ]
         
         widgets = {
-            # 'nik': forms.TextInput(
-            #     attrs={'class': 'form-control',
-            #     'value': }),
+            'nik': forms.TextInput(
+                attrs={'class': 'form-control',
+                 }),
             'mail': forms.TextInput(
                 attrs={'class': 'form-control',
                 'type': 'email',

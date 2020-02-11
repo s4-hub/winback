@@ -39,23 +39,15 @@
                                 <strong>Pendaftaran TK</strong>
                             </div>
                             <div class="card-body card-block">
-                             <form method="post" enctype="multipart/form-data" class="form-horizontal">
+                             <form action="" method="post" class="form-horizontal" novalidate="novalidate">
                                 {% csrf_token %}
-                                <div class="form-group">
-                                    {% for matches in match  %}
-                                    <label class=" form-control-label">Nomor Induk Kependudukan</label>
-                                    <div class="input-group">
-                                        <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                                        <input class="form-control" value="{{ matches.nik }}" read-only>
-                                    </div>
-                                    {% endfor %}
-                                    <small class="form-text text-muted">cth. 1270111100001111</small>
-                                </div>
+                                
                                 <div class="form-group">
                                     <label class=" form-control-label">Email</label>
                                     <div class="input-group">
                                         <div class="input-group-addon"><i class="fa fa-envelope"></i></div>
                                         {{form.mail}}
+                                        {{form.mail.errors}}
                                     </div>
                                     <small class="form-text text-muted">cth. john.doe@gmail.com</small>
                                 </div>
@@ -64,6 +56,7 @@
                                     <div class="input-group">
                                         <div class="input-group-addon"><i class="fa fa-mobile"></i></div>
                                         {{form.no_hp}}
+                                        {{form.no_hp.errors}}
                                     </div>
                                     <small class="form-text text-muted">cth. 082200220022</small>
                                 </div>
@@ -72,14 +65,25 @@
                                     <div class="input-group">
                                         <div class="input-group-addon"><i class="fa fa-briefcase"></i></div>
                                         {{form.pekerjaan1}}
+                                        {{form.pekerjaan1.errors}}
                                     </div>
-                                    <small class="form-text text-muted">cth. Kuala Simpang</small>
+                                    <small class="form-text text-muted">cth. Petani</small>
                                 </div>
                                 <div class="form-group">
                                     <label class=" form-control-label">Pekerjaan 2</label>
                                     <div class="input-group">
                                         <div class="input-group-addon"><i class="fa fa-briefcase"></i></div>
+                                        {{form.pekerjaan2}}
+                                        {{form.pekerjaan2.errors}}
+                                    </div>
+                                    <small class="form-text text-muted">cth. Nelayan</small>
+                                </div>
+                                <div class="form-group">
+                                    <label class=" form-control-label">Lokasi</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-briefcase"></i></div>
                                         {{form.lokasi}}
+                                        {{form.lokasi.errors}}
                                     </div>
                                     <small class="form-text text-muted">ex. Langsa</small>
                                 </div>
@@ -88,6 +92,7 @@
                                     <div class="input-group">
                                         <div class="input-group-addon"><i class="fa fa-money"></i></div>
                                         {{form.penghasilan}}
+                                        {{form.penghasilan.errors}}
                                     </div>
                                     <small class="form-text text-muted">cth. 1000000</small>
                                 </div>
@@ -96,14 +101,16 @@
                                     <div class="input-group">
                                         <div class="input-group-addon"><i class="fa fa-bars" aria-hidden="true"></i></div>
                                         {{form.program}}
+                                        {{form.program.errors}}
                                     </div>
-                                    <small class="form-text text-muted">cth. JKK & JKM</small>
+                                    <small class="form-text text-muted">cth. JKK dan JKM</small>
                                 </div>
                                 <div class="form-group">
                                     <label class=" form-control-label">Bulan</label>
                                     <div class="input-group">
                                         <div class="input-group-addon"><i class="fa fa-clock-o" aria-hidden="true"></i></div>
                                         {{form.bulan}}
+                                        {{form.bulan.errors}}
                                     </div>
                                     <small class="form-text text-muted">cth. 1 Bulan</small>
                                 </div>

@@ -106,7 +106,8 @@
                         <td>{{ matches.tgl_lhr }}</td>
                         <td>{{ matches.alamat }}
                         <td>
-                            <a href="{% url 'daftar:add_tk' %}" class="btn btn-primary" role="button">Daftarkan</a>
+                            <a href="{% url 'daftar:add_tk' pk=matches.pk %}" class="btn btn-primary" role="button">Daftarkan</a>
+
                         </td>
                     </tr>
                      {% endfor %}                                                                               

@@ -136,7 +136,14 @@ class DataTK(models.Model):
     tempat_lhr = models.CharField(max_length=30)
     tgl_lhr = models.CharField(max_length=10)
     alamat = models.TextField()
+
+    # def __str__(self, tonik):
+
+        
+            
+        
     
+
     # def getjson(self):
     #     r = crawler1(y)
    
